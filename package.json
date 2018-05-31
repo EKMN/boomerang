@@ -1,0 +1,27 @@
+{
+  "name": "boomerang",
+  "version": "1.0.0",
+  "description": "A generic-purpose web scraper than can be aimed at anything HTTP-based.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ava": "^0.25.0",
+    "fs-extra": "^6.0.1",
+    "jsdom": "^11.11.0",
+    "nock": "^9.3.0",
+    "node-fetch": "^2.1.2",
+    "ora": "^2.1.0",
+    "ow": "^0.4.0",
+    "pkg": "^4.3.1",
+    "signale": "^1.1.0"
+  },
+  "standard": {
+    "globals": [ "test" ]
+  }
+}
