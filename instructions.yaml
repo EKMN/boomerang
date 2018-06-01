@@ -1,0 +1,19 @@
+saveOnSuccess: true
+instructions:
+- instruction: Get a specific value
+  selector: "#readme > article > div:nth-child(6)"
+
+- instruction: Get all paragraphs
+  selector: p
+
+- instruction: Get all code tags
+  selector: code
+  tag: code-tag
+
+- instruction: Get all spans
+  selector: span
+  tag: span-tag
+
+- instruction: Get all headings
+  selector: h1, h2, h2, h3, h4, h5, h6
+  tag: h-tag
