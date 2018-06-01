@@ -1,30 +1,41 @@
-// const ora = require('ora') // spinner
+const fs = require('fs-extra')
 const signale = require('signale')
-const { argv } = require('yargs')
 const scraper = require('./lib/scraper')
 const nock = require('nock')
 const yaml = require('js-yaml')
-const fs = require('fs-extra')
+const { argv } = require('yargs')
+  .usage('Usage: $0 <command> [options]')
+  .command('--target', 'Scrapes the targeted website')
+  .example('$0 --target https://google.com/', 'Scrapes Google for content')
+  .demandOption([ 'target' ])
+  .describe('config', 'Config file path')
+  .describe('output', `Custom output folder path. Default: '/scrapes`)
+  .describe('target', 'Target website URL')
+  .describe('debug', 'Output debug statement')
+  .alias('c', 'config')
+  .alias('o', 'output')
+  .alias('t', 'target')
+  .alias('d', 'debug')
+  .alias('h', 'help')
+  .alias('v', 'version')
 
-const { target = '', debug } = argv
+const { target = '', debug = false, config = './config.yaml', output = './scrapes' } = argv
 
-// nock('https://dummy.com').get('/').replyWithError('something awful happened')
 nock('https://dummy.com').get('/').reply(401)
 
 if (!target) {
   signale.fatal(Error('target argument is missing'))
 } else {
   try {
-    const instructions = yaml.safeLoad(fs.readFileSync('./instructions.yaml', 'utf8'))
+    const configContents = yaml.safeLoad(fs.readFileSync(config, 'utf8'))
 
     scraper({
+      output,
       target,
       debug,
-      ...instructions
+      ...configContents
     })
   } catch (err) {
-    signale.fatal(
-      Error(`Unable to read default instructions. Please provide an 'instructions.yaml' in the root directory.`)
-    )
+    signale.fatal(Error(`Unable to read default config. Please provide a 'config.yaml' in the root directory.`))
   }
 }

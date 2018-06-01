@@ -1,9 +1,10 @@
 {
   "name": "boomerang",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A generic-purpose web scraper than can be aimed at anything HTTP-based.",
   "main": "scraper.js",
   "scripts": {
+    "build": "pkg scraper.js  --out-path build --debug",
     "test": "ava --verbose"
   },
   "private": true,
@@ -17,6 +18,7 @@
     "js-yaml": "^3.11.0",
     "jsdom": "^11.11.0",
     "keccak": "^1.4.0",
+    "lowdb": "^1.0.0",
     "make-error": "^1.3.4",
     "nock": "^9.3.0",
     "node-fetch": "^2.1.2",
@@ -29,8 +31,6 @@
     "yargs": "^11.0.0"
   },
   "standard": {
-    "globals": [
-      "test"
-    ]
+    "globals": [ "test" ]
   }
 }
